@@ -1,3 +1,4 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -5,10 +6,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -93,13 +91,44 @@ public class JobData {
      * @param value The search term to look for
      * @return      List of all jobs with at least one field containing the value
      */
+
+
+
+
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        //this method takes in a string representing the search input and returns an array of hashmaps that contains the string input
 
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        //get the thing I want to search trough, which is allJobs
+        //System.out.println(allJobs);
+
+        // create a variable that will contain the search results
+        ArrayList<HashMap<String, String>> foundResults = new ArrayList<>();
+
+        for (HashMap<String, String> job : allJobs) {
+
+            for (Map.Entry<String,String> entry : job.entrySet()){
+
+                if (entry.getValue().toLowerCase().contains(value.toLowerCase())) {
+
+                    foundResults.add(job);
+                    break;
+                }
+            }
+
+            // need to notify outer loop that the job contains the value we want
+            //then need to stop inner loop from continuing since value is already found
+
+           //String searchTerm = foundValue.get(value);
+            // System.out.println(searchTerm);
+        }
+        // fill the search results with the jobs that contain the string input
+
+        // return the filled search results
+        return foundResults;
     }
 
     /**

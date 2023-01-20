@@ -1,3 +1,4 @@
+import javax.print.attribute.HashPrintJobAttributeSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -77,7 +78,7 @@ public class TechJobs {
         Boolean validChoice = false;
         String[] choiceKeys = new String[choices.size()];
 
-        // Put the choices in an ordered structure so we can
+        // Put the choices in an ordered structure, so we can
         // associate an integer with each one
         int i = 0;
         for (String choiceKey : choices.keySet()) {
@@ -120,6 +121,28 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        //Delcare loop variables here?
+
+        if (someJobs.size() == 0){
+            System.out.println("No Results");
+            return;
+        }
+
+        //outer loop
+        for (int i = 0; i < someJobs.size(); i++) {
+            //loop body code with print statement
+            HashMap<String, String> someJob = someJobs.get(i);
+            //Commented out because didn't need
+            //System.out.println(someJob);
+            System.out.println("\n*****");
+            //inner loop
+            for (Map.Entry<String,String> entry : someJob.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+                //inner loop body
+                System.out.println(key + ": " + value);
+            }
+            System.out.println("*****");
+        }
     }
 }
